@@ -28,21 +28,7 @@ import java.util.Properties;
         @Autowired
         private Environment env;
 
-        @Bean
-        public LocalSessionFactoryBean getSessionFactory() {
-        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setDataSource(getDataSource());
 
-        Properties props=new Properties();
-        props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        props.put("hibernate.hbm2ddl.import_files", env.getProperty("hibernate.hbm2ddl.import_files"));
-        props.put("hibernate.dialect.MySQLDialect", env.getProperty("hibernate.dialect.MySQLDialect"));
-
-        factoryBean.setHibernateProperties(props);
-        factoryBean.setAnnotatedClasses(User.class);
-        return factoryBean;
-    }
 
         @Bean
         public DataSource getDataSource() {
