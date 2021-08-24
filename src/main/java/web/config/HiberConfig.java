@@ -7,19 +7,25 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import web.models.Role;
 import web.models.User;
+import web.service.RoleService;
+import web.service.UserService;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 
-    @Configuration
+@Configuration
     @PropertySource("classpath:db.properties")
     @EnableTransactionManagement
     @ComponentScan("web")
@@ -29,9 +35,12 @@ import java.util.Properties;
         private Environment env;
 
 //        @Autowired
-//        public HiberConfig(Environment env) {
-//            this.env = env;
-//        }
+//       private UserService userService;
+//
+//        @Autowired
+//       private RoleService roleService;
+
+
 
 
         @Bean
@@ -67,8 +76,11 @@ import java.util.Properties;
             properties.setProperty("hibernate.dialect.MySQLDialect", env.getProperty("hibernate.dialect.MySQLDialect"));
             properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
             properties.setProperty("hibernate.show_sql",env.getProperty("hibernate.show_sql"));
+            properties.setProperty("hibernate.enable_lazy_load_no_trans",env.getProperty("hibernate.enable_lazy_load_no_trans"));
             return properties;
         }
+
+
     }
 
 

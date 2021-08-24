@@ -4,10 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Collection;
 import java.util.Set;
 
@@ -20,13 +17,14 @@ public class User implements UserDetails {
     private int id;
 
     @Column(name = "age")
-    @Min(value = 0,message = "Age should be greater than 0")
+    @Min(value = 6,message = "age should not be less than 1")
+    @Max(value = 100,message = "age should not be more than 3")
     private int age;
 
 
     @Column(name = "email")
     @NotEmpty(message = "Email should be empty")
-    @Email(message = "")
+    @Email(message = "Enter email")
     private String email;
 
 
@@ -39,9 +37,10 @@ public class User implements UserDetails {
     private String username;
 
     @Column(name = "login")
+    @Size(min = 2,max = 20,message = "Login should be between 2 and 20 characters")
     private String login;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_ID"),
             inverseJoinColumns = @JoinColumn(name = "role_ID"))

@@ -6,11 +6,34 @@
     <title>People</title>
 </head>
 <body>
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>User_name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>login</th>
+
+
+
+
+    </tr>
+
+    <tr th:each="flower: ${user}">
+        <td th:utext="${user.getId()}">id</td>
+        <td th:utext="${user.getUsername()}">Username</td>
+        <td th:utext="${user.getAge()}">Age</td>
+        <td th:utext="${user.getEmail()}">email</td>
+        <td th:utext="${user.getLogin()}">login</td>
+
+    </tr>
+</table>
 <div th:each="user : ${user}">
-<p th:text="${user.getUsername()}">VALUE</p>
-<p th:text="${user.getId()}">VALUE</p>
+
 
 <a th:href="@{/admin/{id}/edit(id=${user.getId()})}">Edit</a>
+
+
 <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
   <input type="submit" value="Delete"/>
 </form>

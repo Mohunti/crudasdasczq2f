@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>All Users</title>
@@ -25,8 +26,6 @@
     <td th:utext="${flower.getEmail()}">email</td>
     <td th:utext="${flower.getLogin()}">login</td>
 
-
-
   </tr>
 
 </table>
@@ -34,6 +33,8 @@
 <br/>
 <hr/>
 <a href="/admin/new">Create new person</a>
+<br/>
+<a href="/logout">logout</a>
 <br/>
 
 
