@@ -1,6 +1,7 @@
 package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,6 +48,8 @@ public class AdminController {
 
                          @RequestParam(value = "ADMIN", required = false) String ADMIN,
                          @RequestParam(value = "USER", required = false) String USER) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         if (bindingResult.hasErrors())
             return "new";
 
@@ -60,8 +63,47 @@ public class AdminController {
         if(ADMIN == null && USER == null ){
             roles.add(new Role(2,USER));
         }
+        user.setPassword(encoder.encode(user.getPassword()));
         user.setRoles(roles);
         userService.addUser(user);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("person", userService.showUserById(id));
+        model.addAttribute("roles", roleService.getAllRoles());
+
+        return "edit";
+    }
+
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("person") @Valid User user,
+                         BindingResult bindingResult,
+                         @PathVariable("id") int id,
+                         @RequestParam(value = "role", required = false) String[] AllRoles) {
+        if (bindingResult.hasErrors())
+            return "edit";
+        User user1 = user;
+        Set<Role> roles = new HashSet<>();
+        for (String role : AllRoles) {
+            roles.add(roleService.findRoles(role));
+        }
+        user1.setRoles(roles);
+        userService.updateUser(user1);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/{id}")
+    public String show(@PathVariable("id") int id, Model model) {
+        model.addAttribute("user", userService.showUserById(id));
+        return "show";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id) {
+        userService.removeUser(id);
         return "redirect:/admin";
     }
 }
