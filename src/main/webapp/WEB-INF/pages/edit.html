@@ -1,24 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Update person</title>
 </head>
 <body>
 <form th:method="PATCH" th:action="@{/user/{id}(id=${person.getId()})}" th:object="${person}">
-    <label for="name"> Enter name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
-    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    <label for="username"> Enter name: </label>
+    <input type="text" th:field="*{username}" id="username"/>
     <br/>
-    <label for="age"> Enter name: </label>
+    <label for="age"> Enter age: </label>
     <input type="text" th:field="*{age}" id="age"/>
-    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
     <br/>
-    <label for="email"> Enter name: </label>
+    <label for="email"> Enter Email: </label>
     <input type="text" th:field="*{email}" id="email"/>
-    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    <br/>
+    <label for="login"> Enter Login: </label>
+    <input type="text" th:field="*{login}" id="login"/>
+    <br/>
+    <label for="password"> Enter Password: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <br/>
+    <ul class="checkbox-list">
+        <li th:each="role:${roles}">
+
+            <input type="checkbox" th:id="${role.id}" th:value="${role.role}" th:name="role" th:checked="${person.roles.contains(role)}" />
+            <span class="primary" th:text="${role.role}"></span>
+        </li>
+    </ul>
+
+<!--    <input type="hidden" name="id" th:value="*{id}">-->
+
+
     <br/>
     <input type="submit" value="Update!"/>
+    <br/>
+
 </form>
 
 </body>

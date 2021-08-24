@@ -1,17 +1,24 @@
 package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import web.dao.UserDao;
+import web.models.Role;
 import web.models.User;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    final
-    UserDao userDao;
+    @Autowired
+   private UserDao userDao;
+
+
 
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
@@ -41,4 +48,13 @@ public class UserServiceImpl implements UserService {
     public void removeUser(int id) {
         userDao.removeUser(id);
     }
+
+    @Override
+    public void save(User user) {
+        user.setPassword(user.getPassword());
+        Set<Role> roles = new HashSet<>();
+
+
+    }
+
 }

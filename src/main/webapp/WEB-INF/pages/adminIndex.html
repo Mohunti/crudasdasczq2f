@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>All Users</title>
+</head>
+<body>
+<table border="1">
+  <tr>
+    <th>id</th>
+    <th>User_name</th>
+    <th>Age</th>
+    <th>Email</th>
+    <th>login</th>
+
+
+
+
+  </tr>
+
+  <tr th:each="flower: ${people}">
+    <td th:utext="${flower.getId()}">id</td>
+    <td th:utext="${flower.getUsername()}">Username</td>
+    <td th:utext="${flower.getAge()}">Age</td>
+    <td th:utext="${flower.getEmail()}">email</td>
+    <td th:utext="${flower.getLogin()}">login</td>
+
+
+
+  </tr>
+
+</table>
+
+<br/>
+<hr/>
+<a href="/admin/new">Create new person</a>
+<br/>
+
+
+</body>
+</html>

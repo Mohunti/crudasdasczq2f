@@ -6,14 +6,31 @@
 </head>
 <body>
 
-<div th:each="user : ${people}">
-  <a th:href="@{/user/{id}(id=${user.getId()})}"
-     th:text="${user.getName() + ', ' + user.getAge()}">user</a>
-</div>
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>User_name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>login</th>
 
-<br/>
-<hr/>
-<a href="/user/new">Create new person</a>
+
+
+
+    </tr>
+
+    <tr th:each="flower: ${people}">
+        <td th:utext="${flower.getId()}">id</td>
+        <td th:utext="${flower.getUsername()}">Username</td>
+        <td th:utext="${flower.getAge()}">Age</td>
+        <td th:utext="${flower.getEmail()}">email</td>
+        <td th:utext="${flower.getLogin()}">login</td>
+
+
+
+    </tr>
+
+</table>
 
 </body>
 </html>

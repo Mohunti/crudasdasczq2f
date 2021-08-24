@@ -1,42 +1,88 @@
 package web.models;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "users")
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "age")
+    @Min(value = 0,message = "Age should be greater than 0")
+    private int age;
+
 
     @Column(name = "email")
     @NotEmpty(message = "Email should be empty")
     @Email(message = "")
     private String email;
 
-    @Column(name = "age")
-    @Min(value = 0,message = "Age should be greater than 0")
-    private int age;
 
-    @Column(name = "name")
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "username")
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2,max = 120,message = "Name should be between 2 and 8 characters")
-    private String name;
+    private String username;
+
+    @Column(name = "login")
+    private String login;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+   @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_ID"),
+            inverseJoinColumns = @JoinColumn(name = "role_ID"))
+
+ private Set<Role> roles;
 
 
 
-
-    public User (String name, String email, int age) {
-
-        this.name = name;
-        this.email = email;
-        this.age = age;
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public User(int age, String email, String password, String username, String login, Set<Role> roles) {
+        this.age = age;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.login = login;
+        this.roles = roles;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     public User() {
     }
 
@@ -57,7 +103,9 @@ public class User {
     }
 
 
-
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
 
     public int getId() {
@@ -68,11 +116,33 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
 }

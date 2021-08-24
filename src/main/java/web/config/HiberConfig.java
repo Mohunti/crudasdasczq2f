@@ -28,6 +28,10 @@ import java.util.Properties;
         @Autowired
         private Environment env;
 
+//        @Autowired
+//        public HiberConfig(Environment env) {
+//            this.env = env;
+//        }
 
 
         @Bean
@@ -44,7 +48,7 @@ import java.util.Properties;
         public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
             LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
             em.setDataSource(getDataSource());
-            em.setPackagesToScan("web.models");
+            em.setPackagesToScan(new String[]{"web.models"});
 
             em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
             em.setJpaProperties(additionalProperties());
@@ -62,7 +66,7 @@ import java.util.Properties;
             Properties properties = new Properties();
             properties.setProperty("hibernate.dialect.MySQLDialect", env.getProperty("hibernate.dialect.MySQLDialect"));
             properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-            properties.setProperty("hibernate.hbm2ddl.import_files", env.getProperty("hibernate.hbm2ddl.import_files"));
+            properties.setProperty("hibernate.show_sql",env.getProperty("hibernate.show_sql"));
             return properties;
         }
     }
