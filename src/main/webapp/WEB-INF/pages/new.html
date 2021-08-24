@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>New Person</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/user}" th:object="${person}">
+<form th:method="POST" th:action="@{/admin}" th:object="${person}">
     <label for="username"> Enter name: </label>
     <input type="text" th:field="*{username}" id="username"/>
     <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
@@ -26,20 +27,12 @@
     <input type="text" th:field="*{password}" id="password"/>
     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name error</div>
     <br/>
-    <ul class="checkbox-list">
-        <li th:each="role:${roles}">
-
-            <input type="checkbox" th:id="${role.id}" th:value="${role.role}" th:name="role" th:checked="${person.roles.contains(role)}" />
-            <span class="primary" th:text="${role.role}"></span>
-        </li>
-    </ul>
-
-    <!--    <input type="hidden" name="id" th:value="*{id}">-->
-
-
+    <input type="submit" value="Create!"/>
     <br/>
-    <input type="submit" value="Update!"/>
+    <input type="checkbox"  th:id="1" name="ADMIN" value="ADMIN">ADMIN</p>
+    <input type="checkbox"  th:id="2"  name="USER" value="USER">USER</p>
     <br/>
+
 
 </form>
 

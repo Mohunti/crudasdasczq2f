@@ -57,16 +57,25 @@ public class UserController {
 
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid User user,
-                         BindingResult bindingResult, @RequestParam(value = "role", required = false) String[] AllRoles) {
+                         BindingResult bindingResult,
+
+                         @RequestParam(value = "ADMIN", required = false) String ADMIN,
+                         @RequestParam(value = "USER", required = false) String USER) {
         if (bindingResult.hasErrors())
             return "new";
-        User user1 = user;
+
         Set<Role> roles = new HashSet<>();
-        for (String role : AllRoles) {
-            roles.add(roleService.findRoles(role));
+        if(ADMIN != null){
+            roles.add(new Role(1,ADMIN));
         }
-        user1.setRoles(roles);
-        userService.updateUser(user1);
+         if(USER != null){
+            roles.add(new Role(2,USER));
+        }
+         if(ADMIN == null && USER == null ){
+            roles.add(new Role(2,USER));
+        }
+        user.setRoles(roles);
+        userService.addUser(user);
         return "redirect:/user";
     }
 
@@ -94,16 +103,6 @@ public class UserController {
         user1.setRoles(roles);
         userService.updateUser(user1);
 
-
-//        if(ADMIN != null){
-//            roles.add(new Role(1,ADMIN));
-//        }
-//        if(USER != null){
-//            roles.add(new Role(2,USER));
-//        }
-//        if(USER == null && ADMIN == null){
-//            roles.add(new Role(2,USER));
-//        }
 
 
         return "redirect:/user";

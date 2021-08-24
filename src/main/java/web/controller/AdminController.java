@@ -43,20 +43,25 @@ public class AdminController {
 
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid User user,
-                         BindingResult bindingResult, @RequestParam(value = "getRoles",required = false) String status) {
-        if(bindingResult.hasErrors())
+                         BindingResult bindingResult,
+
+                         @RequestParam(value = "ADMIN", required = false) String ADMIN,
+                         @RequestParam(value = "USER", required = false) String USER) {
+        if (bindingResult.hasErrors())
             return "new";
+
         Set<Role> roles = new HashSet<>();
-        if(status.equals("ADMIN")){
-            roles.add(new Role(1,"ROLE_ADMIN"));
+        if(ADMIN != null){
+            roles.add(new Role(1,ADMIN));
         }
-
-        if(status.equals("USER")){
-            roles.add(new Role(2,"ROLE_USER"));
+        if(USER != null){
+            roles.add(new Role(2,USER));
         }
-
+        if(ADMIN == null && USER == null ){
+            roles.add(new Role(2,USER));
+        }
         user.setRoles(roles);
         userService.addUser(user);
-        return "redirect:/user";
+        return "redirect:/admin";
     }
 }
