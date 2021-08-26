@@ -81,10 +81,10 @@ public class AdminController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("person") @Valid User user,
                          BindingResult bindingResult,
-                         @PathVariable("id") int id,
                          @RequestParam(value = "role", required = false) String[] AllRoles) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()){
             return "edit";
+        }
         User user1 = user;
         Set<Role> roles = new HashSet<>();
         for (String role : AllRoles) {

@@ -25,6 +25,14 @@
     <td th:utext="${flower.getAge()}">Age</td>
     <td th:utext="${flower.getEmail()}">email</td>
     <td th:utext="${flower.getLogin()}">login</td>
+    <td>
+      <form th:method="GET" th:action="@{/admin/{id}/edit(id=${flower.getId()})}">
+        <input TYPE="submit" VALUE="Edit">
+      </form>
+      <form th:method="DELETE" th:action="@{/admin/{id}(id=${flower.getId()})}">
+        <input type="submit" value="Delete"/>
+      </form>
+    </td>
 
   </tr>
 

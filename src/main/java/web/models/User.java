@@ -17,14 +17,14 @@ public class User implements UserDetails {
     private int id;
 
     @Column(name = "age")
-    @Min(value = 6,message = "age should not be less than 1")
-    @Max(value = 100,message = "age should not be more than 3")
+//    @Min(value = 6,message = "age should not be less than 1")
+//    @Max(value = 100,message = "age should not be more than 3")
     private int age;
 
 
     @Column(name = "email")
-    @NotEmpty(message = "Email should be empty")
-    @Email(message = "Enter email")
+//    @NotEmpty(message = "Email should be empty")
+//    @Email(message = "Enter email")
     private String email;
 
 
@@ -32,12 +32,12 @@ public class User implements UserDetails {
     private String password;
 
     @Column(name = "username")
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2,max = 120,message = "Name should be between 2 and 8 characters")
+//    @NotEmpty(message = "Name should not be empty")
+//    @Size(min = 2,max = 120,message = "Name should be between 2 and 8 characters")
     private String username;
 
     @Column(name = "login")
-    @Size(min = 2,max = 20,message = "Login should be between 2 and 20 characters")
+//    @Size(min = 2,max = 20,message = "Login should be between 2 and 20 characters")
     private String login;
 
     @ManyToMany(fetch = FetchType.LAZY)
