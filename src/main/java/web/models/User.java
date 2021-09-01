@@ -45,6 +45,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_ID"),
             inverseJoinColumns = @JoinColumn(name = "role_ID"))
 
+
  private Set<Role> roles;
 
 
@@ -72,6 +73,14 @@ public class User implements UserDetails {
         this.username = username;
         this.login = login;
         this.roles = roles;
+    }
+
+    public User(int age, String email, String password, String username, String login) {
+        this.age = age;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.login = login;
     }
 
     public Set<Role> getRoles() {

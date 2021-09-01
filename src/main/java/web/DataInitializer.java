@@ -11,6 +11,7 @@ import web.service.UserService;
 import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
+
 /*
 
 !!!!!!! Копался в коде, не могу понять почему не работает класс, вроде что то со связью(могу ошибаться)
@@ -30,42 +31,27 @@ public class DataInitializer {
 
     @PostConstruct
     public void Init() {
-        Set<Role> allRoles = new HashSet<>();
-        allRoles.add(new Role(1, "ROLE_ADMIN"));
-        allRoles.add(new Role(2, "ROLE_USER"));
-        for (Role role : allRoles) {
-            roleService.save(role);
-        }
+        Role role1 = new Role(1, "ROLE_ADMIN");
+        Role role2 = new Role(2, "ROLE_USER");
 
-        Set<Role> allRolesUser = new HashSet<>();
-        String[] rol = {"ROLE_USER"};
-        for (String s : rol) {
-            allRolesUser.add(roleService.findRoles(s));
-        }
+        roleService.save(role1);
+        roleService.save(role2);
 
-        Set<Role> allRolesAdmin = new HashSet<>();
-        String[] rol2 = {"ROLE_ADMIN", "ROLE_USER"};
-        for (String s : rol2) {
-            allRolesAdmin.add(roleService.findRoles(s));
-        }
 
-        User user = new User();
-        user.setUsername("User");
-        user.setLogin("User");
-        user.setEmail("User@mail.ru");
-        user.setAge(12);
-        user.setPassword(new BCryptPasswordEncoder(12).encode("123"));
-        user.setRoles(allRolesUser);
+        Set<Role> admin = new HashSet<>();
+        Set<Role> user = new HashSet<>();
 
-        User admin = new User();
-        admin.setUsername("Admin");
-        admin.setLogin("Admin");
-        admin.setEmail("Admin@mail.ru");
-        admin.setAge(12);
-        admin.setPassword(new BCryptPasswordEncoder(12).encode("123"));
-        admin.setRoles(allRolesAdmin);
+        admin.add(role1);
+        admin.add(role2);
 
-        userService.save(user);
-        userService.save(admin);
+        user.add(role2);
+
+        User user1 = new User(12, "admin@mail.ru", "$2a$12$dzv3mjWI7jZ14ZK6tfyqoemrzVH8Wre9fe.0ua97QM0Z4tB9AHlRO", "admin", "admin");
+        user1.setRoles(admin);
+        userService.addUser(user1);
+
+        User user2 = new User(12, "user@mail.ru", "$2a$12$TgSiJRPap8YWktu2DJbLhOAgHCLNhqvNnPoPA9LtVVsEJykN9GMuu", "user", "user");
+        user2.setRoles(user);
+        userService.addUser(user2);
     }
 }
