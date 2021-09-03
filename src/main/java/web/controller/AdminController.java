@@ -1,6 +1,8 @@
 package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,6 +68,7 @@ public class AdminController {
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("person", userService.showUserById(id));
         model.addAttribute("roles", roleService.getAllRoles());
 

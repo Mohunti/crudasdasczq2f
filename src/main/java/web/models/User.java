@@ -27,7 +27,7 @@ public class User implements UserDetails {
 //    @Email(message = "Enter email")
     private String email;
 
-
+    @NotEmpty(message = "not empty")
     @Column(name = "password")
     private String password;
 

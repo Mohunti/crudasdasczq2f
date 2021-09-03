@@ -20,12 +20,12 @@
 
     </tr>
 
-    <tr th:each="flower: ${people}">
-        <td th:utext="${flower.getId()}">id</td>
-        <td th:utext="${flower.getUsername()}">Username</td>
-        <td th:utext="${flower.getAge()}">Age</td>
-        <td th:utext="${flower.getEmail()}">email</td>
-        <td th:utext="${flower.getLogin()}">login</td>
+    <tr th:object="${user}">
+        <td th:text="${user.getId()}">id</td>
+        <td th:text="${user.getUsername()}">Username</td>
+        <td th:text="${user.getAge()}">Age</td>
+        <td th:text="${user.getEmail()}">email</td>
+        <td th:text="${user.getLogin()}">login</td>
 
 
 
