@@ -16,13 +16,17 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-   private UserDao userDao;
+    private final UserDao userDao;
+
+    final
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
 
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userDao = userDao;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+
     }
 
     @Override
@@ -52,10 +56,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        user.setPassword(user.getPassword());
-        Set<Role> roles = new HashSet<>();
-
-
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userDao.addUser(user);
     }
 
 }

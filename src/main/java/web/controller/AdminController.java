@@ -44,14 +44,9 @@ public class AdminController {
 
     @PostMapping()
     public String create(@ModelAttribute("person") @Valid User user,
-                         BindingResult bindingResult,
-
                          @RequestParam(value = "ADMIN", required = false) String ADMIN,
                          @RequestParam(value = "USER", required = false) String USER) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-        if (bindingResult.hasErrors())
-            return "new";
 
         Set<Role> roles = new HashSet<>();
         if(ADMIN != null){
@@ -78,7 +73,7 @@ public class AdminController {
     }
 
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public String update(@ModelAttribute("person") @Valid User user,
                          BindingResult bindingResult,
                          @RequestParam(value = "role", required = false) String[] AllRoles) {
