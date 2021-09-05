@@ -17,8 +17,6 @@ public class User implements UserDetails {
     private int id;
 
     @Column(name = "age")
-//    @Min(value = 6,message = "age should not be less than 1")
-//    @Max(value = 100,message = "age should not be more than 3")
     private int age;
 
 

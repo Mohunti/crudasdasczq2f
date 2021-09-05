@@ -19,9 +19,9 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class UserDaoImpl implements UserDao {
+public class  UserDaoImpl implements UserDao {
 
-    @PersistenceContext
+    @Autowired
     EntityManager entityManager;
 
     @Override

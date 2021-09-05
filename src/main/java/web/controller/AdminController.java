@@ -68,10 +68,8 @@ public class AdminController {
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("person", userService.showUserById(id));
         model.addAttribute("roles", roleService.getAllRoles());
-
         return "edit";
     }
 
