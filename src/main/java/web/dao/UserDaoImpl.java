@@ -21,7 +21,7 @@ import java.util.List;
 @Transactional
 public class  UserDaoImpl implements UserDao {
 
-    @Autowired
+    @PersistenceContext
     EntityManager entityManager;
 
     @Override

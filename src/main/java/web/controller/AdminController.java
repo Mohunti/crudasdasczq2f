@@ -70,6 +70,7 @@ public class AdminController {
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("person", userService.showUserById(id));
         model.addAttribute("roles", roleService.getAllRoles());
+
         return "edit";
     }
 
