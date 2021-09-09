@@ -9,22 +9,19 @@
 <table border="2">
   <tr>
     <th>id</th>
-    <th>User_name</th>
+    <th>Name</th>
+    <th>surName</th>
     <th>Age</th>
-    <th>Email</th>
-    <th>login</th>
 
-
-
-
+    
   </tr>
 
   <tr th:each="flower: ${people}">
     <td th:utext="${flower.getId()}">id</td>
     <td th:utext="${flower.getUsername()}">Username</td>
+    <td th:utext="${flower.getSurName()}">email</td>
     <td th:utext="${flower.getAge()}">Age</td>
-    <td th:utext="${flower.getEmail()}">email</td>
-    <td th:utext="${flower.getLogin()}">login</td>
+
     <td>
       <form th:method="GET" th:action="@{/admin/{id}/edit(id=${flower.getId()})}">
         <input TYPE="submit" VALUE="Edit">

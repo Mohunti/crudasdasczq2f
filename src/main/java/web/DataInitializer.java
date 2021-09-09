@@ -46,11 +46,11 @@ public class DataInitializer {
 
         user.add(role2);
 
-        User user1 = new User(12, "admin@mail.ru", "$2a$12$PoPNV8pbDXaqeVJ2wY.yIuvzePp2tiIQAwsO7MM4FG4VZ1KmZDCrG", "admin", "admin");
+        User user1 = new User(12, "admin@mail.ru", "$2a$12$PoPNV8pbDXaqeVJ2wY.yIuvzePp2tiIQAwsO7MM4FG4VZ1KmZDCrG", "admin");
         user1.setRoles(admin);
         userService.addUser(user1);
 
-        User user2 = new User(12, "user@mail.ru", "$2a$12$5sAqoUKIXcpF8cYuY5LRMuSmq8ZB5zc4s9DT62bUiTrJG.fDRzD6C", "user", "user");
+        User user2 = new User(12, "user@mail.ru", "$2a$12$5sAqoUKIXcpF8cYuY5LRMuSmq8ZB5zc4s9DT62bUiTrJG.fDRzD6C", "user");
         user2.setRoles(user);
         userService.addUser(user2);
     }

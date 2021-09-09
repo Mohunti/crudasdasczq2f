@@ -10,12 +10,9 @@
 <table border="1">
     <tr>
         <th>id</th>
-        <th>User_name</th>
+        <th>Name</th>
+        <th>surName</th>
         <th>Age</th>
-        <th>Email</th>
-        <th>login</th>
-
-
 
 
     </tr>
@@ -23,9 +20,8 @@
     <tr th:object="${user}">
         <td th:text="${user.getId()}">id</td>
         <td th:text="${user.getUsername()}">Username</td>
+        <td th:text="${user.getSurName()}">email</td>
         <td th:text="${user.getAge()}">Age</td>
-        <td th:text="${user.getEmail()}">email</td>
-        <td th:text="${user.getLogin()}">login</td>
 
 
 

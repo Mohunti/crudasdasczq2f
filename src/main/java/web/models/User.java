@@ -22,10 +22,10 @@ public class User implements UserDetails {
     private int age;
 
 
-    @Column(name = "email")
+    @Column(name = "surName")
 //    @NotEmpty(message = "Email should be empty")
 //    @Email(message = "Enter email")
-    private String email;
+    private String surName;
 
     @NotEmpty(message = "not empty")
     @Column(name = "password")
@@ -36,9 +36,9 @@ public class User implements UserDetails {
 //    @Size(min = 2,max = 120,message = "Name should be between 2 and 8 characters")
     private String username;
 
-    @Column(name = "login")
-//    @Size(min = 2,max = 20,message = "Login should be between 2 and 20 characters")
-    private String login;
+//    @Column(name = "login")
+////    @Size(min = 2,max = 20,message = "Login should be between 2 and 20 characters")
+//    private String login;
 
     @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(name = "user_roles",
@@ -58,29 +58,29 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getLogin() {
-        return login;
-    }
+//    public String getLogin() {
+//        return login;
+//    }
+//
+//    public void setLogin(String login) {
+//        this.login = login;
+//    }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+//    public User(int age, String surName, String password, String username, Set<Role> roles) {
+//        this.age = age;
+//        this.surName = surName;
+//        this.password = password;
+//        this.username = username;
+//       // this.login = login;
+//        this.roles = roles;
+//    }
 
-    public User(int age, String email, String password, String username, String login, Set<Role> roles) {
+    public User(int age, String surName, String password, String username) {
         this.age = age;
-        this.email = email;
+        this.surName = surName;
         this.password = password;
         this.username = username;
-        this.login = login;
-        this.roles = roles;
-    }
-
-    public User(int age, String email, String password, String username, String login) {
-        this.age = age;
-        this.email = email;
-        this.password = password;
-        this.username = username;
-        this.login = login;
+       // this.login = login;
     }
 
     public Set<Role> getRoles() {
@@ -94,12 +94,12 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public String getEmail() {
-        return email;
+    public String getSurName() {
+        return surName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSurName(String surName) {
+        this.surName = surName;
     }
 
     public int getAge() {

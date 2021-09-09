@@ -10,15 +10,13 @@
     <label for="username"> Enter name: </label>
     <input type="text" th:field="*{username}" id="username"/>
     <br/>
+    <label for="surName"> Enter surName: </label>
+    <input type="text" th:field="*{surName}" id="surName"/>
+    <br/>
     <label for="age"> Enter age: </label>
     <input type="text" th:field="*{age}" id="age"/>
     <br/>
-    <label for="email"> Enter Email: </label>
-    <input type="text" th:field="*{email}" id="email"/>
-    <br/>
-    <label for="login"> Enter Login: </label>
-    <input type="text" th:field="*{login}" id="login"/>
-    <br/>
+
     <label for="password"> Enter Password: </label>
     <input type="password" name="pass" th:field="*{password}" id="password"/>
     <br/>
@@ -29,8 +27,6 @@
             <span class="primary" th:text="${role.role}"></span>
         </li>
     </ul>
-
-<!--    <input type="hidden" name="id" th:value="*{id}">-->
 
 
     <br/>
